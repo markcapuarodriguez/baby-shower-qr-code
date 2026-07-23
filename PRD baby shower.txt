@@ -1,0 +1,706 @@
+# Product Requirements Document (PRD)
+
+# Baby Shower RSVP & Gift Registry
+
+**Version:** 2.0
+**Project Owner:** Mark Rodriguez
+**Backend:** Convex
+**Frontend:** React + TypeScript + Tailwind CSS + shadcn/ui
+**Deployment:** Vercel / Lovable
+**Target Users:** Baby shower guests and event organizers
+
+---
+
+# 1. Project Overview
+
+Develop a modern, elegant, and mobile-first Baby Shower website that serves as a digital invitation, RSVP system, and online gift registry.
+
+The website should eliminate paper invitations, prevent duplicate gifts, automatically organize RSVPs, and provide a seamless experience through a QR code that guests can scan.
+
+The project must use **Convex** as the backend database to enable real-time synchronization of RSVPs and gift reservations.
+
+---
+
+# 2. Goals
+
+### Primary Goals
+
+* Digital invitation
+* QR Code invitation
+* Online RSVP
+* Online Baby Registry
+* Prevent duplicate gifts
+* Admin Dashboard
+* Real-time updates
+* Mobile-first design
+
+### Success Metrics
+
+* RSVP takes less than 2 minutes.
+* No duplicate gift reservations.
+* All guest data stored securely online.
+* Website loads in under 2 seconds.
+* Works on Android, iPhone, tablet, and desktop.
+
+---
+
+# 3. Target Audience
+
+### Guests
+
+Family
+
+Friends
+
+Coworkers
+
+Neighbors
+
+Guests with limited technical knowledge
+
+---
+
+### Host
+
+Parents
+
+Event organizer
+
+---
+
+# 4. User Flow
+
+## Guest Journey
+
+Receive Printed Invitation
+
+↓
+
+Scan QR Code
+
+↓
+
+Open Website
+
+↓
+
+View Invitation
+
+↓
+
+RSVP
+
+↓
+
+Browse Gift Wishlist
+
+↓
+
+Reserve Gift
+
+↓
+
+Receive Confirmation
+
+↓
+
+Done
+
+---
+
+## Admin Journey
+
+Login
+
+↓
+
+Dashboard
+
+↓
+
+View RSVP List
+
+↓
+
+View Gift Reservations
+
+↓
+
+Update Event Details
+
+↓
+
+Export Guest List
+
+---
+
+# 5. Website Pages
+
+## 1. Home
+
+Large Hero Banner
+
+Baby Shower Title
+
+Parent Names
+
+Event Date
+
+Event Time
+
+Venue
+
+Countdown Timer
+
+Buttons
+
+* RSVP
+* Gift Wishlist
+
+---
+
+## 2. Event Details
+
+Show
+
+Date
+
+Time
+
+Venue
+
+Dress Code
+
+Google Maps
+
+Parking
+
+Contact Person
+
+Add to Calendar
+
+Share Website
+
+---
+
+## 3. RSVP
+
+Fields
+
+Guest Name
+
+Mobile Number
+
+Email (optional)
+
+Will Attend
+
+Number of Guests
+
+Food Restrictions
+
+Special Message
+
+Confirmation Page
+
+---
+
+## 4. Gift Wishlist
+
+Guests should be able to browse all requested gifts.
+
+Each gift card displays
+
+Image
+
+Item Name
+
+Category
+
+Suggested Price
+
+Short Description
+
+Availability
+
+Reserve Button
+
+Status Badge
+
+Available
+
+Reserved
+
+---
+
+## Gift Categories
+
+Essentials
+
+Feeding
+
+Bath & Care
+
+Clothing
+
+Nursery
+
+Travel
+
+Health
+
+---
+
+## Gift Filters
+
+All
+
+Under AED 50
+
+AED 50–100
+
+AED 101–200
+
+AED 201–300
+
+Category
+
+Availability
+
+---
+
+# 6. Gift Reservation Flow
+
+Guest clicks
+
+Reserve
+
+↓
+
+Popup
+
+Enter Name
+
+↓
+
+Optional Mobile Number
+
+↓
+
+Confirm
+
+↓
+
+Backend checks
+
+Available?
+
+↓
+
+YES
+
+↓
+
+Create Reservation
+
+↓
+
+Mark Item Reserved
+
+↓
+
+Generate Reservation Code
+
+↓
+
+Display Success Screen
+
+---
+
+If item already reserved
+
+Display
+
+"Sorry, someone has already reserved this gift."
+
+---
+
+# 7. Database
+
+Backend
+
+## Convex
+
+Collections
+
+---
+
+### eventSettings
+
+```typescript
+{
+parentNames
+eventDate
+eventTime
+venue
+googleMaps
+dressCode
+contactPerson
+contactNumber
+rsvpDeadline
+announcement
+}
+```
+
+---
+
+### gifts
+
+```typescript
+{
+name
+category
+description
+minPrice
+maxPrice
+image
+visible
+reserved
+reservationId
+}
+```
+
+---
+
+### reservations
+
+```typescript
+{
+giftId
+guestName
+mobileNumber
+reservationCode
+reservedAt
+status
+}
+```
+
+---
+
+### rsvps
+
+```typescript
+{
+guestName
+mobile
+email
+attendance
+numberOfGuests
+dietaryRestrictions
+message
+submittedAt
+}
+```
+
+---
+
+### adminUsers
+
+```typescript
+{
+username
+hashedPassword
+role
+}
+```
+
+---
+
+# 8. Real-Time Features
+
+Because Convex supports reactive queries:
+
+Whenever someone reserves a gift
+
+Every connected guest instantly sees
+
+Available
+
+↓
+
+Reserved
+
+without refreshing the page.
+
+Likewise
+
+New RSVP submissions appear automatically in the admin dashboard.
+
+---
+
+# 9. Admin Dashboard
+
+Protected Login
+
+Dashboard includes
+
+## Event Settings
+
+Edit
+
+Title
+
+Parent Names
+
+Date
+
+Time
+
+Venue
+
+Google Maps
+
+Dress Code
+
+Announcement
+
+Contact Information
+
+RSVP Deadline
+
+---
+
+## RSVP Management
+
+View RSVP
+
+Search Guests
+
+Filter
+
+Delete RSVP
+
+Export CSV
+
+Attendance Statistics
+
+---
+
+## Gift Management
+
+Add Gift
+
+Edit Gift
+
+Delete Gift
+
+Hide Gift
+
+Change Price
+
+Upload Image
+
+Change Category
+
+---
+
+## Reservation Management
+
+View Reserved Gifts
+
+Cancel Reservation
+
+Restore Availability
+
+Search Reservation
+
+---
+
+# 10. QR Code
+
+Admin page should include
+
+Generate QR Code
+
+Download PNG
+
+Download SVG
+
+Print Friendly
+
+QR code always points to
+
+https://yourdomain.com
+
+---
+
+# 11. Notifications
+
+After RSVP
+
+Show
+
+"Thank you! We can't wait to celebrate with you."
+
+After Reservation
+
+Show
+
+Reservation Code
+
+Reminder
+
+"Please keep this code if you need to cancel your reservation."
+
+---
+
+# 12. Security
+
+Admin authentication
+
+Password hashing
+
+Server-side validation
+
+Convex mutation validation
+
+Rate limiting
+
+Spam protection
+
+Reservation locking
+
+HTTPS only
+
+No guest information displayed publicly
+
+---
+
+# 13. UI Design
+
+Theme
+
+Elegant
+
+Warm
+
+Minimal
+
+Premium
+
+Soft
+
+Family-friendly
+
+---
+
+## Colors
+
+Cream
+
+Warm White
+
+Dusty Blue
+
+Sage Green
+
+Soft Peach
+
+Warm Gray
+
+---
+
+## Typography
+
+Playfair Display
+
+Inter
+
+Large buttons
+
+Rounded corners
+
+Soft shadows
+
+Accessible spacing
+
+---
+
+# 14. Technical Stack
+
+Frontend
+
+* React
+* TypeScript
+* Tailwind CSS
+* shadcn/ui
+* React Hook Form
+* Zod
+* QR Code Generator
+
+Backend
+
+* Convex
+* Convex Auth (or custom admin authentication)
+* Convex File Storage
+
+Hosting
+
+* Vercel or Lovable
+
+---
+
+# 15. Suggested Gift List (Maximum AED 300)
+
+| Gift                   | Suggested Price |
+| ---------------------- | --------------- |
+| Baby Wipes (Bulk Pack) | AED 40–80       |
+| Newborn Diapers        | AED 60–100      |
+| Size 1 Diapers         | AED 60–100      |
+| Baby Lotion            | AED 25–50       |
+| Baby Wash & Shampoo    | AED 40–80       |
+| Diaper Rash Cream      | AED 25–50       |
+| Hooded Towels          | AED 50–100      |
+| Muslin Swaddles        | AED 70–150      |
+| Burp Cloths            | AED 40–80       |
+| Bib Set                | AED 30–70       |
+| Newborn Bodysuits      | AED 60–150      |
+| Sleepsuits             | AED 70–160      |
+| Socks & Mittens        | AED 25–60       |
+| Digital Thermometer    | AED 80–180      |
+| Baby Nail Kit          | AED 30–70       |
+| Pacifier & Case        | AED 40–90       |
+| Bottle Drying Rack     | AED 80–180      |
+| Baby Bottle Set        | AED 100–250     |
+| Baby Laundry Detergent | AED 35–80       |
+| Nursery Storage Basket | AED 70–180      |
+| Portable Changing Mat  | AED 70–180      |
+| Babyshop Gift Card     | AED 100–300     |
+| Mothercare Gift Card   | AED 100–300     |
+
+---
+
+# 16. Future Enhancements
+
+* Email confirmations
+* WhatsApp RSVP reminders
+* Automated thank-you messages
+* Photo gallery
+* Digital guestbook
+* Multi-language support (English, Filipino, Arabic)
+* Event analytics dashboard
+* Gift purchase links from UAE retailers
+
+---
+
+# 17. Acceptance Criteria
+
+The project will be considered complete when:
+
+* Guests can access the invitation by scanning a QR code.
+* RSVP submissions are stored in Convex and appear in the admin dashboard without page refresh.
+* Gift reservations are stored in Convex and immediately update the availability status for all visitors.
+* The system prevents duplicate reservations through backend validation.
+* Administrators can manage event details, gifts, and RSVPs from a secure dashboard.
+* Guests can download the event QR code and add the event to their calendar.
+* The website is fully responsive, accessible, and optimized for modern browsers on Android, iPhone, tablet, and desktop.
