@@ -3,8 +3,12 @@ type WishlistImage = {
   sourceUrl: string;
 };
 
-const openverseImage = (id: string, sourceUrl: string): WishlistImage => ({
-  imageUrl: `https://api.openverse.org/v1/images/${id}/thumb/`,
+const openverseImage = (
+  id: string,
+  sourceUrl: string,
+  directImageUrl?: string,
+): WishlistImage => ({
+  imageUrl: directImageUrl ?? `https://api.openverse.org/v1/images/${id}/thumb/`,
   sourceUrl,
 });
 
@@ -12,6 +16,7 @@ export const wishlistImages: Record<string, WishlistImage> = {
   "Baby Wipes (Bulk Pack)": openverseImage(
     "86d7acbe-5d21-45a9-b2eb-55412f02c321",
     "https://commons.wikimedia.org/w/index.php?curid=72889961",
+    "https://upload.wikimedia.org/wikipedia/commons/5/58/Pampers_Sensitive_x12_baby_wipes_lingettes_b%C3%A9b%C3%A9_Feuchtt%C3%BCcher_%282%29.jpg",
   ),
   "Pampers Premium Care Newborn": openverseImage(
     "ec81d987-1dff-4a06-8c2b-c0b30d40c5e1",
@@ -32,6 +37,7 @@ export const wishlistImages: Record<string, WishlistImage> = {
   "Baby Shampoo": openverseImage(
     "81f40418-cf21-4d07-ad23-7d60e1220ee2",
     "https://commons.wikimedia.org/w/index.php?curid=86698009",
+    "https://upload.wikimedia.org/wikipedia/commons/f/f3/A_bottle_of_Aveeno_Baby_Wash_%26_Shampoo_02.jpg",
   ),
   "Baby Lotion": openverseImage(
     "1a8c0eb2-9d03-4408-af2a-5d1bd647181f",
@@ -60,6 +66,7 @@ export const wishlistImages: Record<string, WishlistImage> = {
   "Sleepsuit Set": openverseImage(
     "449d4ff0-321d-4fcc-8625-09982f516bd2",
     "https://commons.wikimedia.org/w/index.php?curid=85437150",
+    "https://upload.wikimedia.org/wikipedia/commons/0/0d/Blue_babygrow.png",
   ),
   "Socks & Mittens Set": openverseImage(
     "e8c0c14e-ee1a-4834-ae42-897df9662d77",
