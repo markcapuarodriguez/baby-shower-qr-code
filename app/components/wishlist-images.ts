@@ -87,6 +87,7 @@ export const wishlistImages: Record<string, WishlistImage> = {
   "Bottle Drying Rack": openverseImage(
     "9101dcf5-35e8-4249-a9b5-d42eb4fe735c",
     "https://commons.wikimedia.org/w/index.php?curid=140748644",
+    "https://upload.wikimedia.org/wikipedia/commons/1/11/Splash_Bottle_Dryer_by_Skip_Hop.jpg",
   ),
   "Baby Bottle Starter Set": openverseImage(
     "f43a3071-dea3-40f1-9581-8f75224b2d10",
@@ -103,6 +104,7 @@ export const wishlistImages: Record<string, WishlistImage> = {
   "Portable Changing Mat": openverseImage(
     "facc59d2-f826-452d-8248-94443a81fb32",
     "https://commons.wikimedia.org/w/index.php?curid=91070033",
+    "https://upload.wikimedia.org/wikipedia/commons/1/1e/Portable_baby-changing_mat%2C_Oude_Pekela_%282020%29_03.jpg",
   ),
   "Baby Grooming Kit": openverseImage(
     "1a8c0eb2-9d03-4408-af2a-5d1bd647181f",
@@ -119,6 +121,7 @@ export const wishlistImages: Record<string, WishlistImage> = {
   "Silicone Teether (3+ Months)": openverseImage(
     "528d05b6-cb99-4c80-8e94-36ebda9754f2",
     "https://commons.wikimedia.org/w/index.php?curid=6812683",
+    "https://upload.wikimedia.org/wikipedia/commons/b/b0/Teething_Ring.jpg",
   ),
   "Babyshop Gift Card": openverseImage(
     "6e7f3e14-19b3-4f1b-ae52-5561452bd304",
