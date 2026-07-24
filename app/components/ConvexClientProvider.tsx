@@ -4,7 +4,9 @@ import { ConvexAuthProvider } from "@convex-dev/auth/react";
 import { ConvexReactClient } from "convex/react";
 import type { ReactNode } from "react";
 
-const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL;
+const convexUrl =
+  process.env.NEXT_PUBLIC_CONVEX_URL ??
+  "https://enchanted-possum-100.convex.cloud";
 const convexClient = convexUrl ? new ConvexReactClient(convexUrl) : null;
 
 export function ConvexClientProvider({
