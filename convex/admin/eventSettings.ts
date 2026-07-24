@@ -7,6 +7,7 @@ const eventFields = {
   parentNames: v.string(),
   eventDate: v.string(),
   eventTime: v.string(),
+  eventEndTime: v.optional(v.string()),
   timeZone: v.string(),
   venue: v.string(),
   googleMaps: v.optional(v.string()),

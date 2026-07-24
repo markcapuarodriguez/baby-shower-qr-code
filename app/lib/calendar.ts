@@ -18,6 +18,7 @@ export function buildCalendarFile(
 
   const date = event.eventDate.replaceAll("-", "");
   const time = event.eventTime.replace(":", "");
+  const endTime = event.eventEndTime?.replace(":", "");
   const timestamp = generatedAt
     .toISOString()
     .replace(/[-:]/g, "")
@@ -32,7 +33,9 @@ export function buildCalendarFile(
     `UID:${date}-${time}@baby-in-bloom`,
     `DTSTAMP:${timestamp}`,
     `DTSTART;TZID=${event.timeZone}:${date}T${time}00`,
-    "DURATION:PT3H",
+    endTime
+      ? `DTEND;TZID=${event.timeZone}:${date}T${endTime}00`
+      : "DURATION:PT3H",
     `SUMMARY:${escapeIcs(event.title)}`,
     `LOCATION:${escapeIcs(event.venue)}`,
     `DESCRIPTION:${escapeIcs(`Baby shower celebration for ${event.parentNames}`)}`,

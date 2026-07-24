@@ -751,6 +751,7 @@ function EventSettings() {
         parentNames: String(data.get("parentNames") ?? ""),
         eventDate: String(data.get("eventDate") ?? ""),
         eventTime: String(data.get("eventTime") ?? ""),
+        eventEndTime: String(data.get("eventEndTime") ?? "") || undefined,
         timeZone: String(data.get("timeZone") ?? ""),
         venue: String(data.get("venue") ?? ""),
         googleMaps: String(data.get("googleMaps") ?? "") || undefined,
@@ -793,8 +794,16 @@ function EventSettings() {
             <input name="eventDate" type="date" defaultValue={event?.eventDate} required />
           </label>
           <label>
-            Time
+            Start time
             <input name="eventTime" type="time" defaultValue={event?.eventTime} required />
+          </label>
+          <label>
+            End time
+            <input
+              name="eventEndTime"
+              type="time"
+              defaultValue={event?.eventEndTime}
+            />
           </label>
           <label>
             RSVP deadline

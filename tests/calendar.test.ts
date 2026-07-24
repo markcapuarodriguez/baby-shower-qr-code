@@ -9,6 +9,7 @@ describe("calendar export", () => {
         parentNames: "Alex; Sam",
         eventDate: "2026-10-10",
         eventTime: "15:30",
+        eventEndTime: "19:30",
         timeZone: "Asia/Dubai",
         venue: "Garden, Dubai",
         contactPerson: "Host",
@@ -19,6 +20,7 @@ describe("calendar export", () => {
     );
 
     expect(calendar).toContain("DTSTART;TZID=Asia/Dubai:20261010T153000");
+    expect(calendar).toContain("DTEND;TZID=Asia/Dubai:20261010T193000");
     expect(calendar).toContain("SUMMARY:Baby Shower\\, in Bloom");
     expect(calendar).toContain("LOCATION:Garden\\, Dubai");
     expect(calendar).toContain("DTSTAMP:20260723T100000Z");

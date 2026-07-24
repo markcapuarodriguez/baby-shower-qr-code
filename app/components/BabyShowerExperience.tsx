@@ -80,6 +80,7 @@ export type PublicEventSettings = {
   parentNames: string;
   eventDate: string;
   eventTime: string;
+  eventEndTime?: string;
   timeZone: string;
   venue: string;
   googleMaps?: string;
@@ -241,11 +242,15 @@ export function BabyShowerExperience({
         year: "numeric",
       })
     : "Coming soon";
-  const formattedTime = event?.eventTime
-    ? new Date(`2000-01-01T${event.eventTime}:00`).toLocaleTimeString("en-AE", {
+  const formatEventTime = (time: string) =>
+    new Date(`2000-01-01T${time}:00`).toLocaleTimeString("en-AE", {
         hour: "numeric",
         minute: "2-digit",
-      })
+      });
+  const formattedTime = event?.eventTime
+    ? `${formatEventTime(event.eventTime)}${
+        event.eventEndTime ? `–${formatEventTime(event.eventEndTime)}` : ""
+      }`
     : "To be announced";
 
   return (
