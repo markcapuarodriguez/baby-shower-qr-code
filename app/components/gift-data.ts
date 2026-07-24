@@ -8,6 +8,7 @@ export type Gift = {
   reserved?: boolean;
   icon: string;
   imageUrl?: string;
+  imageSourceUrl?: string;
 };
 
 export const gifts: Gift[] = [

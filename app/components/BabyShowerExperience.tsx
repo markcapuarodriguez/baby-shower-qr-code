@@ -465,6 +465,17 @@ export function BabyShowerExperience({
                 ) : (
                   <span>{gift.icon}</span>
                 )}
+                {gift.imageSourceUrl && (
+                  <a
+                    className="gift-image-credit"
+                    href={gift.imageSourceUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`View photo source for ${gift.name}`}
+                  >
+                    Photo source
+                  </a>
+                )}
                 <small className={gift.reserved ? "reserved" : "available"}>
                   {gift.reserved ? "Reserved" : "Available"}
                 </small>

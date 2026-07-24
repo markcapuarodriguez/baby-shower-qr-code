@@ -648,6 +648,19 @@ textarea:focus-visible {
   width: 100%;
 }
 
+.gift-image-credit {
+  background: rgba(255, 255, 255, 0.86);
+  border-radius: 999px;
+  bottom: 12px;
+  color: var(--sage-dark);
+  font-size: 10px;
+  font-weight: 700;
+  left: 12px;
+  padding: 5px 9px;
+  position: absolute;
+  text-decoration: none;
+}
+
 .gift-visual small {
   border-radius: 999px;
   font-size: 11px;

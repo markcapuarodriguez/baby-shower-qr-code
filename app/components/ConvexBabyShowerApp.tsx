@@ -9,6 +9,7 @@ import {
 } from "./BabyShowerExperience";
 import { gifts as previewGifts, type Gift } from "./gift-data";
 import { ConvexClientProvider } from "./ConvexClientProvider";
+import { wishlistImages } from "./wishlist-images";
 
 const categoryIcons: Record<string, string> = {
   Essentials: "☁️",
@@ -35,17 +36,22 @@ function ConnectedBabyShowerExperience() {
   const reserveGift = useMutation(api.reservations.reserve);
 
   const giftCards: Gift[] =
-    liveGifts?.map((gift) => ({
-      id: gift.id,
-      name: gift.name,
-      category: gift.category,
-      description: gift.description,
-      minPrice: gift.minPrice,
-      price: formatPrice(gift.minPrice, gift.maxPrice),
-      reserved: gift.reserved,
-      icon: categoryIcons[gift.category] ?? "🎁",
-      imageUrl: gift.imageUrl ?? undefined,
-    })) ?? [];
+    liveGifts?.map((gift) => {
+      const webImage = wishlistImages[gift.name];
+
+      return {
+        id: gift.id,
+        name: gift.name,
+        category: gift.category,
+        description: gift.description,
+        minPrice: gift.minPrice,
+        price: formatPrice(gift.minPrice, gift.maxPrice),
+        reserved: gift.reserved,
+        icon: categoryIcons[gift.category] ?? "🎁",
+        imageUrl: gift.imageUrl ?? webImage?.imageUrl,
+        imageSourceUrl: gift.imageUrl ? undefined : webImage?.sourceUrl,
+      };
+    }) ?? [];
 
   async function handleReservation(submission: GiftReservationSubmission) {
     return await reserveGift({
