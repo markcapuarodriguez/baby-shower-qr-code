@@ -21,6 +21,8 @@ const categoryIcons: Record<string, string> = {
 };
 
 function formatPrice(minPrice: number, maxPrice: number) {
+  if (minPrice === 0 && maxPrice === 0) return "";
+
   return minPrice === maxPrice
     ? `AED ${minPrice}`
     : `AED ${minPrice}–${maxPrice}`;

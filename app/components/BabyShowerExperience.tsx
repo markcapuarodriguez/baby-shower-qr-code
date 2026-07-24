@@ -434,18 +434,20 @@ export function BabyShowerExperience({
           </p>
         </div>
 
-        <div className="filter-row" aria-label="Filter gifts by category">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className={selectedCategory === category ? "active" : ""}
-              aria-pressed={selectedCategory === category}
-              onClick={() => setSelectedCategory(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+        {categories.length > 2 && (
+          <div className="filter-row" aria-label="Filter gifts by category">
+            {categories.map((category) => (
+              <button
+                key={category}
+                className={selectedCategory === category ? "active" : ""}
+                aria-pressed={selectedCategory === category}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        )}
 
         <div className="gift-grid">
           {visibleGifts.map((gift) => (
@@ -468,10 +470,12 @@ export function BabyShowerExperience({
                 </small>
               </div>
               <div className="gift-card-copy">
-                <p>{gift.category}</p>
+                {gift.category !== "Wishlist" && <p>{gift.category}</p>}
                 <h3>{gift.name}</h3>
-                <span className="gift-price">{gift.price}</span>
-                <p className="gift-description">{gift.description}</p>
+                {gift.price && <span className="gift-price">{gift.price}</span>}
+                {gift.description && (
+                  <p className="gift-description">{gift.description}</p>
+                )}
                 <button
                   disabled={gift.reserved}
                   onClick={() => {
