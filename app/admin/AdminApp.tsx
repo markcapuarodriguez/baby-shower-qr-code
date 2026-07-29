@@ -313,6 +313,15 @@ function AdminHeader({
 
 function Overview() {
   const stats = useQuery(api.admin.dashboard.getStats);
+  const rsvps = useQuery(api.admin.rsvps.list);
+  const attendingRsvps = useMemo(
+    () => (rsvps ?? []).filter((rsvp) => rsvp.attendance === "attending"),
+    [rsvps],
+  );
+  const attendingGuestTotal = attendingRsvps.reduce(
+    (total, rsvp) => total + rsvp.numberOfGuests,
+    0,
+  );
   const statCards = [
     { label: "RSVP responses", value: stats?.rsvpResponses, icon: Mail },
     { label: "Attending guests", value: stats?.attendingGuests, icon: Users },
@@ -341,6 +350,40 @@ function Overview() {
           );
         })}
       </div>
+      <details className="admin-attendance-dropdown">
+        <summary>
+          <span>
+            <strong>Who&apos;s attending</strong>
+            <small>Names and party sizes</small>
+          </span>
+          <span className="admin-attendance-total">
+            {rsvps === undefined
+              ? "Loading..."
+              : `${attendingGuestTotal} ${
+                  attendingGuestTotal === 1 ? "person" : "people"
+                }`}
+          </span>
+        </summary>
+        <div className="admin-attendance-content">
+          {rsvps === undefined ? (
+            <p>Loading the guest list...</p>
+          ) : attendingRsvps.length === 0 ? (
+            <p>No guests have confirmed that they are attending yet.</p>
+          ) : (
+            <ul>
+              {attendingRsvps.map((rsvp) => (
+                <li key={rsvp._id}>
+                  <span>{rsvp.guestName}</span>
+                  <strong>
+                    {rsvp.numberOfGuests}{" "}
+                    {rsvp.numberOfGuests === 1 ? "person" : "people"}
+                  </strong>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </details>
       <div className="admin-welcome-panel">
         <div>
           <p className="admin-overline">Today’s focus</p>

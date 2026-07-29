@@ -319,6 +319,105 @@
   font-size: 36px;
 }
 
+.admin-attendance-dropdown {
+  background: #fffdf8;
+  border: 1px solid rgba(38, 53, 47, 0.1);
+  border-radius: 20px;
+  margin-top: 22px;
+  overflow: hidden;
+}
+
+.admin-attendance-dropdown summary {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  list-style: none;
+  padding: 22px 24px;
+}
+
+.admin-attendance-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.admin-attendance-dropdown summary > span:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.admin-attendance-dropdown summary > span:first-child > strong {
+  font-family: var(--font-playfair), serif;
+  font-size: 22px;
+}
+
+.admin-attendance-dropdown summary small {
+  color: #6f7973;
+}
+
+.admin-attendance-total {
+  align-items: center;
+  background: #dfe9e1;
+  border-radius: 999px;
+  color: #486052;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 13px;
+  white-space: nowrap;
+}
+
+.admin-attendance-dropdown summary::after {
+  color: #587060;
+  content: "⌄";
+  font-size: 22px;
+  transition: transform 180ms ease;
+}
+
+.admin-attendance-dropdown[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.admin-attendance-content {
+  border-top: 1px solid rgba(38, 53, 47, 0.1);
+  padding: 0 24px;
+}
+
+.admin-attendance-content > p {
+  color: #6f7973;
+  margin: 0;
+  padding: 22px 0;
+}
+
+.admin-attendance-content ul {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+}
+
+.admin-attendance-content li {
+  align-items: center;
+  border-bottom: 1px solid rgba(38, 53, 47, 0.08);
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+
+.admin-attendance-content li:last-child {
+  border-bottom: 0;
+}
+
+.admin-attendance-content li > span {
+  font-weight: 600;
+}
+
+.admin-attendance-content li > strong {
+  color: #587060;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
 .admin-welcome-panel {
   align-items: center;
   background: #dfe9e1;
@@ -686,6 +785,15 @@ code {
   .admin-stats-grid,
   .admin-form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .admin-attendance-dropdown summary {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .admin-attendance-dropdown summary::after {
+    margin-left: auto;
   }
 
   .admin-gift-list article {
