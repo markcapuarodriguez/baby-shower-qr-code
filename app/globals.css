@@ -20,6 +20,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -37,6 +38,7 @@ textarea {
 
 button {
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 button:focus-visible,
@@ -528,6 +530,7 @@ textarea:focus-visible {
   display: grid;
   font-size: 13px;
   gap: 5px;
+  overflow-wrap: anywhere;
   padding: 20px 24px;
   text-decoration: none;
 }
@@ -827,6 +830,12 @@ footer p {
   width: 100%;
 }
 
+@supports (height: 100dvh) {
+  .modal {
+    max-height: calc(100dvh - 40px);
+  }
+}
+
 .compact-modal {
   max-width: 520px;
 }
@@ -1033,8 +1042,12 @@ footer p {
     align-items: center;
     background: transparent;
     border: 0;
+    border-radius: 50%;
     color: var(--ink);
     display: flex;
+    height: 44px;
+    justify-content: center;
+    width: 44px;
   }
 
   .mobile-nav {
@@ -1050,7 +1063,8 @@ footer p {
   }
 
   .mobile-nav button {
-    padding: 12px;
+    min-height: 48px;
+    padding: 12px 10px;
     text-align: left;
   }
 
@@ -1097,6 +1111,8 @@ footer p {
 @media (max-width: 620px) {
   .site-header {
     height: 68px;
+    padding-left: max(18px, env(safe-area-inset-left));
+    padding-right: max(18px, env(safe-area-inset-right));
   }
 
   .brand {
@@ -1115,6 +1131,8 @@ footer p {
   .hero {
     min-height: auto;
     padding-bottom: 80px;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-top: 72px;
   }
 
@@ -1128,6 +1146,15 @@ footer p {
 
   .hero-actions .button {
     width: 100%;
+  }
+
+  .countdown {
+    gap: 12px;
+    justify-content: space-between;
+  }
+
+  .countdown span {
+    min-width: 54px;
   }
 
   .arch {
@@ -1157,6 +1184,16 @@ footer p {
     padding: 14px 0 0;
   }
 
+  .details-section,
+  .gift-section,
+  .closing-section {
+    padding: 68px 18px;
+  }
+
+  .section-heading {
+    margin-bottom: 38px;
+  }
+
   .detail-grid,
   .gift-grid {
     grid-template-columns: 1fr;
@@ -1167,7 +1204,7 @@ footer p {
   }
 
   .event-map iframe {
-    height: 280px;
+    height: 250px;
   }
 
   .event-extras span + span,
@@ -1190,6 +1227,11 @@ footer p {
     padding: 30px;
   }
 
+  .detail-card h3 {
+    font-size: 26px;
+    overflow-wrap: anywhere;
+  }
+
   .gift-intro h2,
   .section-heading h2,
   .closing-card h2 {
@@ -1201,10 +1243,72 @@ footer p {
     grid-template-columns: 1fr;
   }
 
+  .filter-row {
+    margin-left: -18px;
+    margin-right: -18px;
+    padding-left: 18px;
+    padding-right: 18px;
+    scroll-padding-left: 18px;
+    scroll-snap-type: x proximity;
+  }
+
+  .filter-row button {
+    min-height: 44px;
+    scroll-snap-align: start;
+  }
+
+  .gift-description {
+    min-height: 0;
+  }
+
+  .gift-card-copy button {
+    justify-content: center;
+    min-height: 46px;
+    width: 100%;
+  }
+
+  .modal-backdrop {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal {
+    border-radius: 24px 24px 0 0;
+    max-height: 92vh;
+    padding: 30px 20px max(26px, env(safe-area-inset-bottom));
+  }
+
+  @supports (height: 100dvh) {
+    .modal {
+      max-height: 92dvh;
+    }
+  }
+
+  .modal h2 {
+    font-size: 38px;
+    padding-right: 42px;
+  }
+
+  .modal-close {
+    height: 44px;
+    width: 44px;
+  }
+
+  .modal input,
+  .modal textarea {
+    font-size: 16px;
+    min-height: 50px;
+  }
+
+  .choice-row label {
+    min-height: 50px;
+  }
+
   footer {
     align-items: flex-start;
     flex-direction: column;
     gap: 18px;
+    padding-bottom: max(36px, env(safe-area-inset-bottom));
   }
 }
 

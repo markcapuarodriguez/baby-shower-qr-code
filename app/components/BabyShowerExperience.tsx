@@ -127,6 +127,18 @@ export function BabyShowerExperience({
   const [rsvpSubmitting, setRsvpSubmitting] = useState(false);
   const [reservationSubmitting, setReservationSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const modalOpen = rsvpOpen || selectedGift !== null || reservation !== null;
+
+  useEffect(() => {
+    if (!modalOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [modalOpen]);
 
   const categories = useMemo(
     () => ["All", ...Array.from(new Set(gifts.map((gift) => gift.category)))],
