@@ -13,7 +13,6 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
-import Image from "next/image";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { gifts as previewGifts, type Gift } from "./gift-data";
 import { buildCalendarFile } from "../lib/calendar";
@@ -491,36 +490,13 @@ export function BabyShowerExperience({
         <div className="gift-grid">
           {visibleGifts.map((gift) => (
             <article className="gift-card" key={gift.id}>
-              <div className="gift-visual">
-                {gift.imageUrl ? (
-                  <Image
-                    className="gift-image"
-                    src={gift.imageUrl}
-                    alt={gift.name}
-                    width={640}
-                    height={420}
-                    unoptimized
-                  />
-                ) : (
-                  <span>{gift.icon}</span>
-                )}
-                {gift.imageSourceUrl && (
-                  <a
-                    className="gift-image-credit"
-                    href={gift.imageSourceUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`View photo source for ${gift.name}`}
-                  >
-                    Photo source
-                  </a>
-                )}
-                <small className={gift.reserved ? "reserved" : "available"}>
+              <div className="gift-card-copy">
+                <small className={`gift-status ${gift.reserved ? "reserved" : "available"}`}>
                   {gift.reserved ? "Reserved" : "Available"}
                 </small>
-              </div>
-              <div className="gift-card-copy">
-                {gift.category !== "Wishlist" && <p>{gift.category}</p>}
+                {gift.category !== "Wishlist" && (
+                  <p className="gift-category">{gift.category}</p>
+                )}
                 <h3>{gift.name}</h3>
                 {gift.price && <span className="gift-price">{gift.price}</span>}
                 {gift.description && (
