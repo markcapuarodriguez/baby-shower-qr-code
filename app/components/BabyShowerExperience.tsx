@@ -92,6 +92,17 @@ export type PublicEventSettings = {
   announcement?: string;
 };
 
+function getMapEmbedUrl(googleMapsUrl: string, venue: string) {
+  const coordinates = googleMapsUrl.match(
+    /@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/,
+  );
+  const query = coordinates
+    ? `${coordinates[1]},${coordinates[2]}`
+    : venue;
+
+  return `https://www.google.com/maps?q=${encodeURIComponent(query)}&z=17&output=embed`;
+}
+
 type BabyShowerExperienceProps = {
   gifts?: Gift[];
   event?: PublicEventSettings | null;
@@ -404,6 +415,22 @@ export function BabyShowerExperience({
                 Open in Google Maps
               </a>
             )}
+          </div>
+        )}
+
+        {event?.googleMaps && (
+          <div className="event-map">
+            <iframe
+              title={`Map to ${event.venue}`}
+              src={getMapEmbedUrl(event.googleMaps, event.venue)}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+            <a href={event.googleMaps} target="_blank" rel="noreferrer">
+              <MapPin size={18} />
+              Open location in Google Maps
+            </a>
           </div>
         )}
 
